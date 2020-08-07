@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace UnityStandardAssets.Effects
 {
+    [ExecuteInEditMode]
     public class ParticleSystemMultiplier : MonoBehaviour
     {
         // a simple script to scale the size, speed and lifetime of a particle system

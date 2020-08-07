@@ -5,6 +5,9 @@
         _MainTex ("Texture", 2D) = "white" {}
         _Alpha("Alpha", Range(1,0))=0.8
         _Color("Color", Color)=(1,1,1,1)
+        _Max("Max", Range(1,0))= 0.8
+        _Min("Min", Range(1,0))= 0.2
+        [Enum(Exponential, 0, Linear, 1)]_Mode("Mode", int) = 1
     }
     SubShader
     {
@@ -37,10 +40,9 @@
             };
 
             sampler2D _MainTex;
-            float4 _Color;
-            float _Alpha;
-            float4 _MainTex_ST;
-
+            float4 _Color,_MainTex_ST;
+            float _Alpha,_Max, _Min;
+            int _Mode;
             v2f vert (appdata v)
             {
                 v2f o;
@@ -59,7 +61,19 @@
                 col.g *= _Color.g;
                 col.b *= _Color.b;
                 col.a = _Alpha;
-               
+                if(_Mode==1){
+                    if(i.uv.y<=_Min)
+                        col.a *= (i.uv.y/_Min);
+                    else if(i.uv.y>_Max)
+                        col.a *= (1-i.uv.y)/(1-_Max);
+                }else{
+                    _Min=clamp(_Min,0.001,0.999);
+                    if(i.uv.y>=_Min)
+                        col.a *= abs((exp((1-i.uv.y)/(1-_Min))-1));
+                    else
+                        col.a *= abs((exp(i.uv.y/_Min)-1));
+                }
+                
                 return col;
             }
             ENDCG
