@@ -28,18 +28,16 @@ public class WindControl : MonoBehaviour
     {
         system.Stop(true, ParticleSystemStopBehavior.StopEmitting);
     }
-
     void AutoPlayControl()
     {
         float newPosx = Random.Range(-radius, radius);
         float newPosy = Random.Range(-radius, radius);
         transform.position = targetTransform.position + new Vector3(newPosx,
-                                                              newPosy,
-                                                              0);
+                                                                    newPosy,
+                                                                    0);
         system.Play(true);
         Invoke("StopEmitting", 1f);
     }
-
     private void Start()
     {
         InvokeRepeating("AutoPlayControl", startTime, loopTime);
