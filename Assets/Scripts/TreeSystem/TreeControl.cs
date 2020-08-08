@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TreeControl : MonoBehaviour
 {
+    public ParticleSystem leave;
     public ParticleSystem subParticle;
 
     ParticleSystem system
@@ -19,7 +20,7 @@ public class TreeControl : MonoBehaviour
 
     private void OnParticleCollision(GameObject other)
     {
-        //Debug.Log(gameObject.name);
+        if (other.name == gameObject.name) return;
         List<ParticleCollisionEvent> collisionEvents = new List<ParticleCollisionEvent>();
         ParticlePhysicsExtensions.GetCollisionEvents(system, other, collisionEvents);
         for (int i = 0; i< collisionEvents.Count; i++)
@@ -30,8 +31,9 @@ public class TreeControl : MonoBehaviour
 
     void EmitAtLocation(ParticleCollisionEvent particleCollisionEvent)
     {
-        subParticle.transform.position = particleCollisionEvent.intersection;
-        subParticle.transform.rotation = Quaternion.LookRotation(particleCollisionEvent.normal);
-        subParticle.Emit(1);
+        leave.transform.position = particleCollisionEvent.intersection;
+        leave.transform.rotation = Quaternion.LookRotation(particleCollisionEvent.normal);
+        leave.Play();
+        ParticleSystem treeFade = Instantiate(subParticle, particleCollisionEvent.intersection, Quaternion.LookRotation(particleCollisionEvent.normal));
     }
 }
