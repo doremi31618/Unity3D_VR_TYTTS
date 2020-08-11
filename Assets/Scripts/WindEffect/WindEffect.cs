@@ -33,20 +33,31 @@ public class WindEffect : MonoBehaviour
         CancelInvoke();
         if (IsBeginning)
         {
-            leadWind.gameObject.SetActive(true);
-            startWind.gameObject.SetActive(false);
-            InvokeRepeating("AutoPlayLeadWind", startTime, loopTime);
+            startWind.Stop(true, ParticleSystemStopBehavior.StopEmitting);
         }
         else
         {
-            leadWind.gameObject.SetActive(false);
+            leadWind.Stop(true, ParticleSystemStopBehavior.StopEmitting);
             startWind.gameObject.SetActive(true);
             InvokeRepeating("AutoPlayStartWind", beginningStartTime, beginningLoopTime);
         }
         IsBeginning = !IsBeginning;
-        
     }
-
+    public void SetActive()
+    {
+        Invoke("SetLeadActive", 0f);
+    }
+    void SetLeadActive()
+    {
+        leadWind.gameObject.SetActive(true);
+        InvokeRepeating("AutoPlayLeadWind", startTime, loopTime);
+    }
+    void AutoPlayStartWind()
+    {
+        float newPosy = Random.Range(-height, height);
+        startWind.gameObject.transform.position = playerTransform.position + new Vector3(0, newPosy, 0);
+        startWind.Play(true);
+    }
     void AutoPlayLeadWind()
     {
         float newPosx = Random.Range(-radius, radius);
@@ -55,14 +66,6 @@ public class WindEffect : MonoBehaviour
                                                                     newPosy,
                                                                     0);
         leadWind.Play(true);
-    }
-    void AutoPlayStartWind()
-    {
-        float newPosy = Random.Range(0, height);
-        startWind.gameObject.transform.position = playerTransform.position + new Vector3(startWind.transform.position.x,
-                                                                                         newPosy,
-                                                                                         0);
-        startWind.Play(true);
     }
     private void Start()
     {

@@ -25,15 +25,15 @@ public class TreeControl : MonoBehaviour
         ParticlePhysicsExtensions.GetCollisionEvents(system, other, collisionEvents);
         for (int i = 0; i< collisionEvents.Count; i++)
         {
-            EmitAtLocation(collisionEvents[i]);
+            //EmitAtLocation(collisionEvents[i]);
         }
     }
 
-    void EmitAtLocation(ParticleCollisionEvent particleCollisionEvent)
+    void EmitAtLocation(ParticleCollisionEvent particleCollisionEvents)
     {
-        leave.transform.position = particleCollisionEvent.intersection;
-        leave.transform.rotation = Quaternion.LookRotation(particleCollisionEvent.normal);
+        leave.transform.position = particleCollisionEvents.intersection;
+        leave.transform.rotation = Quaternion.Euler(0,0,0);
         leave.Play();
-        ParticleSystem treeFade = Instantiate(subParticle, particleCollisionEvent.intersection, Quaternion.LookRotation(particleCollisionEvent.normal));
+        //ParticleSystem treeFade = Instantiate(subParticle, particleCollisionEvent.intersection, Quaternion.LookRotation(particleCollisionEvent.normal));
     }
 }
