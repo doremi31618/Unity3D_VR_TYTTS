@@ -128,6 +128,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7532302852238939686, guid: 6b1badcf8a02c414e9c77f62689cf572,
+        type: 3}
+      propertyPath: ShapeModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7532302852238939686, guid: 6b1badcf8a02c414e9c77f62689cf572,
+        type: 3}
+      propertyPath: EmissionModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7532302852238939687, guid: 6b1badcf8a02c414e9c77f62689cf572,
         type: 3}
       propertyPath: m_LocalPosition.x
