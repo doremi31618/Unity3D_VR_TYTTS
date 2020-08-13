@@ -19845,77 +19845,77 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!1001 &3657218636969491616
+--- !u!1001 &6341197366303582412
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3657218637780125815, guid: 7a5658c437b0f44449ae5a602123146e,
-        type: 3}
-      propertyPath: m_Name
-      value: Wind Control
-      objectReference: {fileID: 0}
-    - target: {fileID: 3657218637780125816, guid: 7a5658c437b0f44449ae5a602123146e,
-        type: 3}
-      propertyPath: playerTransform
-      value: 
-      objectReference: {fileID: 305797332}
-    - target: {fileID: 3657218637780125817, guid: 7a5658c437b0f44449ae5a602123146e,
+    - target: {fileID: 5717865809917409221, guid: 7a5658c437b0f44449ae5a602123146e,
         type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3657218637780125817, guid: 7a5658c437b0f44449ae5a602123146e,
+    - target: {fileID: 5717865809917409221, guid: 7a5658c437b0f44449ae5a602123146e,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3657218637780125817, guid: 7a5658c437b0f44449ae5a602123146e,
+    - target: {fileID: 5717865809917409221, guid: 7a5658c437b0f44449ae5a602123146e,
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3657218637780125817, guid: 7a5658c437b0f44449ae5a602123146e,
+    - target: {fileID: 5717865809917409221, guid: 7a5658c437b0f44449ae5a602123146e,
         type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3657218637780125817, guid: 7a5658c437b0f44449ae5a602123146e,
+    - target: {fileID: 5717865809917409221, guid: 7a5658c437b0f44449ae5a602123146e,
         type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3657218637780125817, guid: 7a5658c437b0f44449ae5a602123146e,
+    - target: {fileID: 5717865809917409221, guid: 7a5658c437b0f44449ae5a602123146e,
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3657218637780125817, guid: 7a5658c437b0f44449ae5a602123146e,
+    - target: {fileID: 5717865809917409221, guid: 7a5658c437b0f44449ae5a602123146e,
         type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3657218637780125817, guid: 7a5658c437b0f44449ae5a602123146e,
+    - target: {fileID: 5717865809917409221, guid: 7a5658c437b0f44449ae5a602123146e,
         type: 3}
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 3657218637780125817, guid: 7a5658c437b0f44449ae5a602123146e,
+    - target: {fileID: 5717865809917409221, guid: 7a5658c437b0f44449ae5a602123146e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3657218637780125817, guid: 7a5658c437b0f44449ae5a602123146e,
+    - target: {fileID: 5717865809917409221, guid: 7a5658c437b0f44449ae5a602123146e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3657218637780125817, guid: 7a5658c437b0f44449ae5a602123146e,
+    - target: {fileID: 5717865809917409221, guid: 7a5658c437b0f44449ae5a602123146e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5862153967599324865, guid: 7a5658c437b0f44449ae5a602123146e,
+        type: 3}
+      propertyPath: m_Name
+      value: Wind Control
+      objectReference: {fileID: 0}
+    - target: {fileID: 6650158958027640984, guid: 7a5658c437b0f44449ae5a602123146e,
+        type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 305797332}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a5658c437b0f44449ae5a602123146e, type: 3}
