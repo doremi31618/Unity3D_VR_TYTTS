@@ -126,8 +126,8 @@ namespace FrostweepGames.Plugins.GoogleCloud.SpeechRecognition.Examples
 		private void Update()
 		{
 			// update the volume bar
-			if(_speechRecognition.IsRecording)
-			{
+			// if(_speechRecognition.IsRecording)
+			// {
 				// Debug.Log("GetMaxFrame"+_speechRecognition.GetMaxFrame());
 				if (_speechRecognition.GetMaxFrame() > 0)
 				{
@@ -145,11 +145,11 @@ namespace FrostweepGames.Plugins.GoogleCloud.SpeechRecognition.Examples
 
 					_voiceLevelImage.color = current >= 1f ? Color.green : Color.red;
 				}
-			}
-			else
-			{
-				_voiceLevelImage.fillAmount = 0f;
-			}
+			// }
+			// else
+			// {
+			// 	_voiceLevelImage.fillAmount = 0f;
+			// }
 		}
 
 		private void RefreshMicsButtonOnClickHandler()

@@ -4,9 +4,19 @@ using UnityEngine;
 using FrostweepGames.Plugins.GoogleCloud.SpeechRecognition;
 using FrostweepGames.Plugins.GoogleCloud.SpeechRecognition.Examples;
 using UnityEngine.UI;
+
+
+/*
+腳本說明：
+按下空白鍵打開UI介面
+Is Use Recognition ： 只會影響是否觸發事件
+detect target : 目標要辨識出的文字
+result : 偵測到的文字
+*/
 public class SpeechRecognizer : MonoBehaviour
 {
     public bool isUseRecognition = true;
+    public bool isUseGUI = true;
     [Header("Recognition Setting")]
     public Enumerators.LanguageCode language = Enumerators.LanguageCode.cmn_Hant_TW;
     public string detectTarget = "我在這";
@@ -16,11 +26,20 @@ public class SpeechRecognizer : MonoBehaviour
 
     GCSpeechRecognition _speechRecognition;
     Dropdown _microphoneDevicesDropdown;
+    Text resultText;
     // Start is called before the first frame update
     void Start()
     {
         InitSpeechRecognition();
-        StartCoroutine(RecognizeLoop());
+        StartRecordButtonOnClickHandler();
+    }
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space)){
+            isUseGUI=!isUseGUI;
+            transform.GetComponentInChildren<Canvas>(true).gameObject.SetActive(isUseGUI);
+            InitUI();
+        }
     }
     void OnDestroy()
     {
@@ -31,6 +50,8 @@ public class SpeechRecognizer : MonoBehaviour
         _speechRecognition = GCSpeechRecognition.Instance;
         _speechRecognition.RecognizeSuccessEvent += RecognizeSuccessEventHandler;
         _speechRecognition.RecognizeFailedEvent += RecognizeFailedEventHandler;
+        _speechRecognition.ListOperationsSuccessEvent += ListOperationsSuccessEventHandler;
+        _speechRecognition.ListOperationsFailedEvent += ListOperationsFailedEventHandler;
 
         _speechRecognition.FinishedRecordEvent += FinishedRecordEventHandler;
         _speechRecognition.StartedRecordEvent += StartedRecordEventHandler;
@@ -42,10 +63,17 @@ public class SpeechRecognizer : MonoBehaviour
 
         RefreshMicsButtonOnClickHandler();
         InitUI();
-        
+
     }
-    void InitUI(){
+    void InitUI()
+    {
+        if (!isUseGUI) return;
+        GameObject canvas = transform.GetComponentInChildren<Canvas>(true).gameObject;
+        _microphoneDevicesDropdown=canvas.transform.Find("_microphoneDevicesDropdown").GetComponent<Dropdown>();
+        resultText = canvas.transform.Find("ResultText").GetComponent<Text>();
+
         _microphoneDevicesDropdown.onValueChanged.AddListener(MicrophoneDevicesDropdownOnValueChangedEventHandler);
+        resultText.text = "Result : " + result;
     }
     void DestroySpeechRecognition()
     {
@@ -61,44 +89,66 @@ public class SpeechRecognizer : MonoBehaviour
 
     }
 
-    IEnumerator RecognizeLoop()
+
+
+    bool checkAnswer(string Input)
     {
-        while (true)
-        {
-            result = string.Empty;
-            Debug.Log("start recognize");
-            StartRecordButtonOnClickHandler();
-            yield return new WaitForSeconds(1f);
-            Debug.Log("stop recognize");
-            StopRecordButtonOnClickHandler();
-            yield return new WaitForSeconds(1f);
-            Debug.Log("detect");
-            if (result == detectTarget)
-            {
-                TriggerEvent();
+        result = Input;
+        if (isUseGUI) resultText.text = "Result : " + result;
+
+        char[] answerArray = detectTarget.ToCharArray();
+        char[] inputArray = Input.ToCharArray();
+
+        for (int i = 0; i < inputArray.Length; i++){
+            for(int j=0; j<answerArray.Length;j++){
+                Debug.Log(answerArray[j]);
+               if( answerArray[j] == inputArray[i] ) {
+                   resultText.text += " - correct answer";
+                   return true;
+               }
             }
         }
 
+        return false;
     }
 
     void TriggerEvent()
     {
+        if(!isUseRecognition)return;
+        if (isUseGUI) resultText.text += " (Trigger Event)";
         Debug.Log("Trigger");
     }
+    private void ListOperationsFailedEventHandler(string error)
+    {
+        print("List Operations Failed: " + error);
+    }
+
+    private void RecognizeFailedEventHandler(string error)
+    {
+        print("Recognize Failed: " + error);
+    }
+    private void ListOperationsSuccessEventHandler(ListOperationsResponse operationsResponse)
+    {
+        print("List Operations Success.\n");
+
+        if (operationsResponse.operations != null)
+        {
+            print("Operations:\n");
+
+            foreach (var item in operationsResponse.operations)
+            {
+                print("name: " + item.name + "; done: " + item.done + "\n");
+            }
+        }
+    }
+
     public void StartRecordButtonOnClickHandler()
     {
-        // _startRecordButton.interactable = false;
-        // _stopRecordButton.interactable = true;
-        // _detectThresholdButton.interactable = false;
-        // _resultText.text = string.Empty;
 
-        _speechRecognition.StartRecord(isUseRecognition);
+        _speechRecognition.StartRecord(true);
     }
     public void StopRecordButtonOnClickHandler()
     {
-        // _stopRecordButton.interactable = false;
-        // _startRecordButton.interactable = true;
-        // _detectThresholdButton.interactable = true;
 
         _speechRecognition.StopRecord();
     }
@@ -107,15 +157,11 @@ public class SpeechRecognizer : MonoBehaviour
         Debug.Log("Recognize Success.");
         InsertRecognitionResponseInfo(recognitionResponse);
     }
-    private void RecognizeFailedEventHandler(string error)
-    {
-        Debug.Log("Recognize Failed: " + error);
-    }
     private void FinishedRecordEventHandler(AudioClip clip, float[] raw)
     {
 
 
-        if (clip == null || !isUseRecognition)
+        if (clip == null)
             return;
 
         RecognitionConfig config = RecognitionConfig.GetDefault();
@@ -178,20 +224,22 @@ public class SpeechRecognizer : MonoBehaviour
 
     private void RefreshMicsButtonOnClickHandler()
     {
+
         _speechRecognition.RequestMicrophonePermission(null);
-
-        if(_microphoneDevicesDropdown==null)_microphoneDevicesDropdown=GameObject.Find("_microphoneDevicesDropdown").GetComponent<Dropdown>();
-        _microphoneDevicesDropdown.ClearOptions();
-
-        for (int i = 0; i < _speechRecognition.GetMicrophoneDevices().Length; i++)
+        if (isUseGUI)
         {
-            _microphoneDevicesDropdown.options.Add(new Dropdown.OptionData(_speechRecognition.GetMicrophoneDevices()[i]));
+            if (_microphoneDevicesDropdown == null) _microphoneDevicesDropdown = GameObject.Find("_microphoneDevicesDropdown").GetComponent<Dropdown>();
+            _microphoneDevicesDropdown.ClearOptions();
+
+            for (int i = 0; i < _speechRecognition.GetMicrophoneDevices().Length; i++)
+            {
+                _microphoneDevicesDropdown.options.Add(new Dropdown.OptionData(_speechRecognition.GetMicrophoneDevices()[i]));
+            }
+        
+            //smart fix of dropdowns
+            _microphoneDevicesDropdown.value = 1;
+            _microphoneDevicesDropdown.value = 0;
         }
-
-        //smart fix of dropdowns
-        _microphoneDevicesDropdown.value = 1;
-        _microphoneDevicesDropdown.value = 0;
-
         _speechRecognition.SetMicrophoneDevice(_speechRecognition.GetMicrophoneDevices()[0]);
 
     }
@@ -209,7 +257,12 @@ public class SpeechRecognizer : MonoBehaviour
             return;
         }
 
+        //detect answer!!!
         Debug.Log("\n" + recognitionResponse.results[0].alternatives[0].transcript);
+        if (checkAnswer(recognitionResponse.results[0].alternatives[0].transcript))
+        {
+            TriggerEvent();
+        }
 
         var words = recognitionResponse.results[0].alternatives[0].words;
         result = "";
@@ -241,6 +294,8 @@ public class SpeechRecognizer : MonoBehaviour
 
         // _resultText.text += other;
     }
+
+
 
     void OnGUI()
     {

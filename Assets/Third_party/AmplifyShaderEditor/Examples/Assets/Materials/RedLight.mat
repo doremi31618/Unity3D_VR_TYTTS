@@ -1,0 +1,138 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RedLight
+  m_Shader: {fileID: 4800000, guid: a9cca54c21f5548449f8379e6fd285f9, type: 3}
+  m_ShaderKeywords: _EMISSION _USEGRABSCREENCOLOR_ON
+  m_LightmapFlags: 1
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedo:
+        m_Texture: {fileID: 2800000, guid: 5010ea173414f504995919041b602469, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormal:
+        m_Texture: {fileID: 2800000, guid: a53cf5449d11a15d1100a04b44295342, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseRDetail1ASm:
+        m_Texture: {fileID: 2800000, guid: ac33773542007834f928ca531e1ec2ec, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _WaterNormal:
+        m_Texture: {fileID: 2800000, guid: 0dff30680242f0345a6e3c325df802b9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord4:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _BackfaceAlpha: 0.85
+    - _BumpScale: 1
+    - _CascadeAngle: 90
+    - _CascadeAngleFalloff: 5
+    - _CascadeNormalScale: 0.7
+    - _CascadeTransparency: 0.107
+    - _CleanFalloffMultiply: 0.64
+    - _CleanFalloffPower: 1.68
+    - _Cutoff: 0.5
+    - _DetailAOPower: 1
+    - _DetailNoisePower: 3.98
+    - _DetailNormalMapScale: 1
+    - _DetailNormalScale: 0
+    - _DetailSmoothness: 1
+    - _DetailSpecular: 0
+    - _Distortion: 0.5
+    - _DstBlend: 0
+    - _GlobalTiling: 1
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _MacroWaveNormalScale: 0.33
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _ShalowFalloffMultiply: 0.47
+    - _ShalowFalloffPower: 3.54
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _UVSec: 0
+    - _UVVDirection1UDirection0: 0
+    - _UseGrabScreenColor: 1
+    - _WaterAOPower: 1
+    - _WaterNormalScale: 0.3
+    - _WaterSmoothness: 0
+    - _WaterSpecularClose: 0
+    - _WaterSpecularFar: 0
+    - _WaterSpecularThreshold: 1
+    - _ZWrite: 1
+    - __dirty: 1
+    m_Colors:
+    - _CascadeMainSpeed: {r: 104.76, g: 0, b: 0, a: 0}
+    - _CascadeTiling: {r: 2, g: 3, b: 0, a: 0}
+    - _Color: {r: 0.8602941, g: 0.17711939, b: 0.17711939, a: 1}
+    - _DeepColor: {r: 0.28773582, g: 0.81274277, b: 1, a: 0}
+    - _Detail1MainSpeed: {r: 0.2, g: 0.2, b: 0, a: 0}
+    - _Detail1Tiling: {r: 3, g: 3, b: 0, a: 0}
+    - _DetailAlbedoColor: {r: 0, g: 0.4927125, b: 1, a: 0}
+    - _EmissionColor: {r: 1, g: 0, b: 0, a: 1}
+    - _NoiseTiling1: {r: 4, g: 4, b: 0, a: 0}
+    - _ShalowColor: {r: 1, g: 1, b: 1, a: 0}
+    - _WaterMainSpeed: {r: 3.99, g: 0, b: 0, a: 0}
+    - _WaterMixSpeed: {r: 0.01, g: 0, b: 0, a: 0}
+    - _WaterTiling: {r: 3, g: 3, b: 0, a: 0}
